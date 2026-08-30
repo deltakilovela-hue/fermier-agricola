@@ -29,6 +29,7 @@ jobs:
         run: |
           mkdir -p dist
           cp brand/identidad_de_marca.html dist/index.html
+          cp brand/og-image.png dist/og-image.png
           echo "fermier.deltakilo.com.mx" > dist/CNAME
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
