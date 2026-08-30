@@ -1,10 +1,10 @@
-name: Deploy sitio Fermier a GitHub Pages
+name: Deploy propuesta de marca Fermier a GitHub Pages
 
 on:
   push:
     branches: [master]
     paths:
-      - "web/**"
+      - "brand/**"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
@@ -25,9 +25,14 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Preparar carpeta de publicación
+        run: |
+          mkdir -p dist
+          cp brand/identidad_de_marca.html dist/index.html
+          echo "fermier.deltakilo.com.mx" > dist/CNAME
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: web
+          path: dist
       - id: deployment
         uses: actions/deploy-pages@v4
