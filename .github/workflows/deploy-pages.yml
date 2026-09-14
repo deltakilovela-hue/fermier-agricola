@@ -5,6 +5,7 @@ on:
     branches: [master]
     paths:
       - "brand/**"
+      - "contenido-mes1/**"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
@@ -31,6 +32,8 @@ jobs:
           cp brand/identidad_de_marca.html dist/index.html
           cp brand/og-image.png dist/og-image.png
           echo "fermier.deltakilo.com.mx" > dist/CNAME
+          mkdir -p dist/contenido
+          cp -r contenido-mes1/. dist/contenido/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

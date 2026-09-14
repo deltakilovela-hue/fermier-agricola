@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fermier · Contenido Mes 1</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root{
+    --navy:#15447C; --navy-deep:#0E3563; --teal:#0E9984; --teal-deep:#0B7A69;
+    --ink:#101B26; --muted:#51616D; --paper:#F2F6F3; --paper-raised:#FFFFFF; --line:rgba(16,27,38,.13);
+    --shadow: 0 1px 2px rgba(16,27,38,.06), 0 8px 24px rgba(16,27,38,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --navy:#7CACE6; --navy-deep:#5A8FD1; --teal:#3FD1B8; --teal-deep:#2BB59D;
+      --ink:#E9F1EE; --muted:#9FB2AC; --paper:#0A141C; --paper-raised:#111E29; --line:rgba(233,241,238,.12);
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 32px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --navy:#7CACE6; --navy-deep:#5A8FD1; --teal:#3FD1B8; --teal-deep:#2BB59D;
+    --ink:#E9F1EE; --muted:#9FB2AC; --paper:#0A141C; --paper-raised:#111E29; --line:rgba(233,241,238,.12);
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 32px rgba(0,0,0,.35);
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans',-apple-system,sans-serif; font-size:16px; line-height:1.55; }
+  img{ max-width:100%; display:block; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+  h1,h2{ font-family:'Instrument Serif', Georgia, serif; font-weight:400; text-wrap:balance; margin:0; }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  header{ padding:56px 0 40px; border-bottom:1px solid var(--line); }
+  header h1{ font-size:clamp(32px,5vw,50px); }
+  header p{ color:var(--muted); margin-top:12px; max-width:60ch; font-size:16px; }
+  .stats{ display:flex; gap:28px; margin-top:28px; flex-wrap:wrap; }
+  .stat{ font-size:13px; color:var(--muted); }
+  .stat b{ display:block; font-family:'Instrument Serif',serif; font-size:28px; color:var(--ink); }
+
+  nav{ position:sticky; top:0; z-index:20; background:color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  nav .wrap{ display:flex; gap:6px; padding:12px 24px; overflow-x:auto; }
+  nav a{ font-size:13.5px; font-weight:600; color:var(--muted); text-decoration:none; padding:8px 16px; border-radius:20px; white-space:nowrap; }
+  nav a:hover{ background:var(--paper-raised); color:var(--ink); }
+
+  section{ padding:56px 0; border-bottom:1px solid var(--line); }
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:28px; }
+  .section-head h2{ font-size:30px; }
+  .section-count{ font-size:12.5px; color:var(--teal-deep); font-family:'IBM Plex Mono',monospace; }
+
+  .grid-stories{ display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; }
+  .grid-posts{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; }
+  .thumb{ border-radius:8px; overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--line); cursor:zoom-in; background:var(--paper-raised); transition:transform .15s ease; }
+  .thumb:hover{ transform:translateY(-3px); }
+  .thumb img{ width:100%; aspect-ratio:9/16; object-fit:cover; }
+  .grid-posts .thumb img{ aspect-ratio:1/1; }
+  .thumb .cap{ font-size:11px; color:var(--muted); padding:8px 10px; }
+
+  .carousel-block{ margin-bottom:36px; }
+  .carousel-block:last-child{ margin-bottom:0; }
+  .carousel-title{ font-size:14px; font-weight:600; margin-bottom:12px; display:flex; align-items:center; gap:10px; }
+  .carousel-title .mono{ font-size:11px; color:var(--muted); font-weight:400; }
+  .carousel-strip{ display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; scroll-snap-type:x proximity; }
+  .carousel-strip .thumb{ flex:0 0 150px; scroll-snap-align:start; }
+  .carousel-strip .thumb img{ aspect-ratio:4/5; }
+
+  .grid-reels{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:18px; }
+  .reel-card{ background:var(--paper-raised); border:1px solid var(--line); border-radius:8px; overflow:hidden; box-shadow:var(--shadow); text-decoration:none; color:inherit; display:block; }
+  .reel-thumb{ position:relative; aspect-ratio:9/16; background:#000; }
+  .reel-thumb img{ width:100%; height:100%; object-fit:cover; }
+  .reel-play{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+  .reel-play span{ width:56px; height:56px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 14px rgba(0,0,0,.35); }
+  .reel-play svg{ width:20px; height:20px; margin-left:3px; }
+  .reel-card .cap{ padding:10px 12px; font-size:12.5px; font-weight:500; }
+  .reel-card .num{ font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--teal-deep); display:block; margin-bottom:2px; }
+
+  footer{ padding:36px 24px 60px; text-align:center; font-size:11.5px; color:var(--muted); }
+
+  #lightbox{ position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; background:rgba(8,13,18,.9); opacity:0; pointer-events:none; transition:opacity .2s ease; padding:32px; }
+  #lightbox.open{ opacity:1; pointer-events:auto; }
+  #lightbox img{ max-width:92vw; max-height:88vh; border-radius:6px; cursor:default; }
+  #lightbox .lb-close{ position:fixed; top:20px; right:24px; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,.15); color:#fff; border:none; font-size:20px; cursor:pointer; }
+
+  @media (max-width:600px){ .grid-stories{ grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); } }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="mono" style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--teal-deep); margin-bottom:14px;">FERMIER · Contenido</div>
+  <h1>Contenido — Mes 1</h1>
+  <p>Todo lo que se programará este mes, organizado por formato. Haz clic en cualquier imagen para verla completa.</p>
+  <div class="stats">
+    <div class="stat"><b>25</b>Historias</div>
+    <div class="stat"><b>6</b>Posts</div>
+    <div class="stat"><b>5</b>Carruseles</div>
+    <div class="stat"><b>10</b>Reels</div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#historias">Historias</a>
+    <a href="#posts">Posts</a>
+    <a href="#carruseles">Carruseles</a>
+    <a href="#reels">Reels</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <section id="historias">
+    <div class="section-head">
+      <h2>Historias</h2>
+      <div class="section-count mono">25 piezas · 9:16</div>
+    </div>
+    <div class="grid-stories" id="storiesGrid"></div>
+  </section>
+
+  <section id="posts">
+    <div class="section-head">
+      <h2>Posts</h2>
+      <div class="section-count mono">6 piezas · feed</div>
+    </div>
+    <div class="grid-posts" id="postsGrid"></div>
+  </section>
+
+  <section id="carruseles">
+    <div class="section-head">
+      <h2>Carruseles</h2>
+      <div class="section-count mono">5 series</div>
+    </div>
+    <div id="carouselsContainer"></div>
+  </section>
+
+  <section id="reels" style="border-bottom:none;">
+    <div class="section-head">
+      <h2>Reels</h2>
+      <div class="section-count mono">10 videos · serie de servicios</div>
+    </div>
+    <div class="grid-reels" id="reelsGrid"></div>
+  </section>
+</div>
+
+<footer>Preparado por Delta Kilo Soluciones — para FERMIER Laboratorio y Asesoría Agrícola</footer>
+
+<div id="lightbox">
+  <button class="lb-close" aria-label="Cerrar">✕</button>
+  <img id="lightboxImg" alt="">
+</div>
+
+<script>
+  const postCaptions = ["Presentación","Análisis de suelo","Análisis de nematodos","Asesoría técnica","Proceso Fermier","Ubicación"];
+  const reelTitles = [
+    "¿Qué es FERMIER?","El problema puede estar debajo","¿Para qué sirve un análisis de suelo?",
+    "No siempre puedes ver lo que daña la raíz","Las hojas también hablan","No solo importa cuánto riegas",
+    "Una mala muestra puede afectar el resultado","¿Suelo, hoja o agua?","Un reporte sin interpretación",
+    "¿Debes esperar a que aparezca un problema?"
+  ];
+  const carouselCounts = {1:7, 2:6, 3:7, 4:6, 5:7};
+
+  const storiesGrid = document.getElementById('storiesGrid');
+  for (let i = 1; i <= 25; i++) {
+    const n = String(i).padStart(2,'0');
+    storiesGrid.insertAdjacentHTML('beforeend', `<div class="thumb"><img src="media/stories/story-${n}.jpg" alt="Historia ${n}" loading="lazy"></div>`);
+  }
+
+  const postsGrid = document.getElementById('postsGrid');
+  for (let i = 1; i <= 6; i++) {
+    const n = String(i).padStart(2,'0');
+    postsGrid.insertAdjacentHTML('beforeend', `<div class="thumb"><img src="media/posts/post-${n}.jpg" alt="${postCaptions[i-1]}" loading="lazy"><div class="cap">${postCaptions[i-1]}</div></div>`);
+  }
+
+  const carouselsContainer = document.getElementById('carouselsContainer');
+  for (let c = 1; c <= 5; c++) {
+    const cn = String(c).padStart(2,'0');
+    const count = carouselCounts[c];
+    let slidesHtml = '';
+    for (let s = 1; s <= count; s++) {
+      const sn = String(s).padStart(2,'0');
+      slidesHtml += `<div class="thumb"><img src="media/carousels/carrusel-${cn}/slide-${sn}.jpg" alt="Carrusel ${cn} slide ${sn}" loading="lazy"></div>`;
+    }
+    carouselsContainer.insertAdjacentHTML('beforeend', `
+      <div class="carousel-block">
+        <div class="carousel-title">Carrusel ${cn} <span class="mono">${count} slides</span></div>
+        <div class="carousel-strip">${slidesHtml}</div>
+      </div>`);
+  }
+
+  const reelsGrid = document.getElementById('reelsGrid');
+  const reelSlugs = [
+    "servicio-01-que-es-fermier","servicio-02-problema-puede-estar-abajo","servicio-03-para-que-sirve-analisis-suelo",
+    "servicio-04-nematodos","servicio-05-hojas-informacion","servicio-06-calidad-agua-riego",
+    "servicio-07-muestra-mal-tomada","servicio-08-suelo-hoja-agua","servicio-09-no-solo-reporte",
+    "servicio-10-cuando-conviene-analizar"
+  ];
+  const playIcon = '<svg viewBox="0 0 24 24" fill="#15447C"><path d="M8 5v14l11-7z"/></svg>';
+  reelSlugs.forEach((slug, idx) => {
+    const n = String(idx+1).padStart(2,'0');
+    reelsGrid.insertAdjacentHTML('beforeend', `
+      <a class="reel-card" href="media/reels/${slug}.mp4" target="_blank" rel="noopener">
+        <div class="reel-thumb">
+          <img src="media/reels/poster-${slug}.jpg" alt="${reelTitles[idx]}" loading="lazy">
+          <div class="reel-play"><span>${playIcon}</span></div>
+        </div>
+        <div class="cap"><span class="num">REEL ${n}</span>${reelTitles[idx]}</div>
+      </a>`);
+  });
+
+  // Lightbox
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  document.addEventListener('click', (e) => {
+    const img = e.target.closest('.thumb img');
+    if (img) { lbImg.src = img.src; lbImg.alt = img.alt; lb.classList.add('open'); return; }
+    if (e.target.closest('.lb-close') || e.target === lb) { lb.classList.remove('open'); }
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lb.classList.remove('open'); });
+</script>
+</body>
+</html>
