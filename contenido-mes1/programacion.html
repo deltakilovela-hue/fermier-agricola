@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fermier · Programación Mes 1</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root{ --navy:#15447C; --teal:#0E9984; --teal-deep:#0B7A69; --ink:#101B26; --muted:#51616D; --paper:#F2F6F3; --raised:#FFFFFF; --line:rgba(16,27,38,.13); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --navy:#7CACE6; --teal:#3FD1B8; --teal-deep:#2BB59D; --ink:#E9F1EE; --muted:#9FB2AC; --paper:#0A141C; --raised:#111E29; --line:rgba(233,241,238,.12); } }
+  :root[data-theme="dark"]{ --navy:#7CACE6; --teal:#3FD1B8; --teal-deep:#2BB59D; --ink:#E9F1EE; --muted:#9FB2AC; --paper:#0A141C; --raised:#111E29; --line:rgba(233,241,238,.12); }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans',-apple-system,sans-serif; line-height:1.55; }
+  .wrap{ max-width:1000px; margin:0 auto; padding:0 20px; }
+  h1,h2{ font-family:'Instrument Serif',Georgia,serif; font-weight:400; margin:0; text-wrap:balance; }
+  header{ padding:48px 0 28px; border-bottom:1px solid var(--line); }
+  .eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--teal-deep); margin-bottom:12px; }
+  header h1{ font-size:clamp(30px,5vw,44px); }
+  header p{ color:var(--muted); max-width:64ch; margin:12px 0 0; }
+  .rules{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:24px; }
+  .rule{ border-top:2px solid var(--teal); padding-top:10px; font-size:13.5px; color:var(--muted); }
+  .rule b{ display:block; color:var(--ink); font-size:14px; margin-bottom:2px; }
+  section{ padding:40px 0; border-bottom:1px solid var(--line); }
+  section h2{ font-size:28px; margin-bottom:4px; }
+  .sub{ color:var(--muted); font-size:14px; margin:0 0 20px; max-width:66ch; }
+  .tbl{ overflow-x:auto; border:1px solid var(--line); border-radius:6px; background:var(--raised); }
+  table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  th,td{ text-align:left; padding:9px 14px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  th{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+  tr:last-child td{ border-bottom:none; }
+  td.d{ font-variant-numeric:tabular-nums; }
+  .item{ display:grid; grid-template-columns:110px 1fr; gap:18px; padding:18px 0; border-top:1px solid var(--line); }
+  .item:first-of-type{ border-top:none; }
+  .item img{ width:110px; aspect-ratio:4/5; object-fit:cover; border-radius:6px; border:1px solid var(--line); }
+  .item.reel img{ aspect-ratio:9/16; }
+  .item h3{ font-size:15px; font-weight:600; margin:0 0 6px; }
+  .when{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--teal-deep); display:block; margin-bottom:3px; font-weight:500; }
+  .cap{ white-space:pre-wrap; font-size:14px; background:var(--raised); border:1px solid var(--line); border-radius:6px; padding:12px 14px; margin:0 0 6px; }
+  .tags{ font-size:12px; color:var(--muted); margin:0; }
+  .tags b{ font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink); }
+  .strip{ display:grid; grid-template-columns:repeat(auto-fill,minmax(84px,1fr)); gap:8px; }
+  .strip figure{ margin:0; }
+  .strip img{ width:100%; aspect-ratio:9/16; object-fit:cover; border-radius:5px; border:1px solid var(--line); display:block; }
+  .strip figcaption{ font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); margin-top:3px; }
+  footer{ padding:30px 20px 56px; text-align:center; font-size:11.5px; color:var(--muted); }
+  @media (max-width:520px){ .item{ grid-template-columns:84px 1fr; gap:12px; } .item img{ width:84px; } }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="eyebrow">FERMIER · Programación</div>
+  <h1>Programación — Mes 1</h1>
+  <p>Plan propuesto de 7 semanas (22 sep – 7 nov 2026), zona horaria de Culiacán. Borrador para aprobar: nada está programado en GHL todavía.</p>
+  <div class="rules">
+    <div class="rule"><b>Feed: martes, jueves y sábado</b>Martes y jueves a las 12:00 (pausa de medio día, dentro de la ventana de mayor actividad en México). Sábados a las 9:00.</div>
+    <div class="rule"><b>Historias: lun, mié, vie y dom</b>Lunes, miércoles y viernes a las 7:00, cuando el productor revisa el teléfono antes de salir al campo. Domingos a las 19:00.</div>
+    <div class="rule"><b>Orden de las piezas</b>Semanas 1-2 dar a conocer FERMIER, semanas 3-5 educar (suelo, nematodos, hojas, agua, muestra), semanas 6-7 decidir y visitar.</div>
+    <div class="rule"><b>Hashtags</b>Instagram: 8-10 (base + tema de la pieza). Facebook: 3, porque ahí rinden menos.</div>
+  </div>
+</header>
+
+<section class="wrap"><h2>Calendario de feed</h2><p class="sub">21 publicaciones en Facebook + Instagram. Los horarios son una hipótesis: tras 3-4 semanas se ajustan con las estadísticas reales de la cuenta.</p><div class="tbl"><table><thead><tr><th>Fecha</th><th>Hora</th><th>Formato</th><th>Pieza</th></tr></thead><tbody id="calBody"></tbody></table></div></section>
+
+<section class="wrap" id="feed"><h2>Copy por pieza</h2><p class="sub">Tono cercano y con autoridad técnica, dirigido al dueño de la unidad de producción. Cada caption cierra con una invitación directa a escribir por mensaje.</p><div id="feedList"></div></section>
+
+<section class="wrap"><h2>Historias</h2><p class="sub">25 piezas, solo imagen y sin caption. Se publican en orden (H01 a H25) en los días y horas de la regla de arriba.</p><div class="strip" id="storyStrip"></div></section>
+
+<footer>Preparado por Delta Kilo Soluciones — para FERMIER Laboratorio y Asesoría Agrícola</footer>
+
+<script>
+  const pad = n => String(n).padStart(2,'0');
+  const DIAS = ['dom','lun','mar','mié','jue','vie','sáb'];
+  const MES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const fmt = d => `${DIAS[d.getDay()]} ${d.getDate()} ${MES[d.getMonth()]}`;
+
+  const CTA = "Escríbenos por mensaje y te orientamos.";
+  const BASE = "#agricultura #agronomia #hortalizas #cultivos #agronegocios #Sinaloa #Culiacan #Fermier";
+  const ig = extra => (extra ? extra + " " : "") + BASE;
+  const fb = extra => "#Fermier #Agricultura " + (extra || "#Culiacan");
+
+  // type: post | car | reel
+  const pieces = {
+    p01:{t:'post',n:'Post 01 · Presentación',img:'media/posts/post-01.jpg',cap:"Diagnostica. Trata. Cosecha.\n\nSomos FERMIER, laboratorio y asesoría agrícola en Culiacán. Analizamos suelo, agua y tejido vegetal, y te explicamos qué significa cada resultado para tu cultivo.\n\nSi manejas hortalizas y quieres decidir con datos y no a ojo, aquí estamos. "+CTA,ig:ig("#laboratorioagricola"),fb:fb()},
+    r01:{t:'reel',n:'Reel 01 · ¿Qué es FERMIER?',img:'media/reels/poster-servicio-01-que-es-fermier.jpg',cap:"¿Qué hace un laboratorio agrícola por tu cultivo?\n\nEn FERMIER analizamos suelo, agua y tejido vegetal y te acompañamos a interpretar los resultados. Menos suposiciones, mejores decisiones.\n\n"+CTA,ig:ig("#laboratorioagricola"),fb:fb()},
+    c01:{t:'car',n:'Carrusel 01 · 5 señales para revisar tu suelo',img:'media/carousels/carrusel-01/slide-01.jpg',cap:"No todo problema empieza en la parte visible de la planta.\n\nDesliza y revisa 5 señales del suelo que vale la pena atender antes de que se conviertan en pérdida. Guárdalo para tu próxima revisión de campo.\n\n"+CTA,ig:ig("#suelo #analisisdesuelo"),fb:fb("#AnálisisDeSuelo")},
+    p02:{t:'post',n:'Post 02 · Análisis de suelo',img:'media/posts/post-02.jpg',cap:"Tu cultivo comienza debajo de la superficie.\n\nConocer las condiciones del suelo antes de decidir fertilización o tratamiento te ayuda a invertir donde sí hace falta. Un análisis a tiempo se paga solo.\n\nSolicita el tuyo. "+CTA,ig:ig("#analisisdesuelo #suelo"),fb:fb("#AnálisisDeSuelo")},
+    r02:{t:'reel',n:'Reel 02 · El problema puede estar debajo',img:'media/reels/poster-servicio-02-problema-puede-estar-abajo.jpg',cap:"Cuando el cultivo no responde como esperas, la causa muchas veces está en el suelo, no en la planta.\n\nUn análisis te dice qué está pasando debajo antes de que gastes en algo que no era.\n\n"+CTA,ig:ig("#suelo #analisisdesuelo"),fb:fb("#AnálisisDeSuelo")},
+    p06:{t:'post',n:'Post 06 · Ubicación',img:'media/posts/post-06.jpg',cap:"Visítanos en FERMIER.\n\nCalz. de las Torres 4627, Infonavit Barrancos, Culiacán. Referencias: Ley Plaza Barrancos y Bodega Aurrera.\n\nTráenos tu muestra o pasa a platicar con nosotros sobre tu cultivo.",ig:ig("#laboratorioagricola"),fb:fb()},
+    c02:{t:'car',n:'Carrusel 02 · ¿Qué análisis puede necesitar tu cultivo?',img:'media/carousels/carrusel-02/slide-01.jpg',cap:"Cada muestra responde preguntas diferentes.\n\nSuelo, hoja o agua: desliza para saber cuál conviene según lo que estás viendo en tu campo.\n\n"+CTA,ig:ig("#analisisfoliar #aguaderiego"),fb:fb("#AnálisisDeSuelo")},
+    p03:{t:'post',n:'Post 03 · Análisis de nematodos',img:'media/posts/post-03.jpg',cap:"No todo el daño en la raíz se ve a simple vista.\n\nLos nematodos pueden afectar el desarrollo del cultivo sin dar señales claras. Un análisis ayuda a detectar su presencia a tiempo.\n\n"+CTA,ig:ig("#nematodos #raiz"),fb:fb("#Nematodos")},
+    r04:{t:'reel',n:'Reel 04 · No siempre puedes ver lo que daña la raíz',img:'media/reels/poster-servicio-04-nematodos.jpg',cap:"La raíz sufre y tú no lo ves.\n\nLos nematodos pueden dañar el cultivo sin síntomas claros arriba. Un análisis te da la respuesta.\n\n"+CTA,ig:ig("#nematodos #raiz"),fb:fb("#Nematodos")},
+    r05:{t:'reel',n:'Reel 05 · Las hojas también hablan',img:'media/reels/poster-servicio-05-hojas-informacion.jpg',cap:"Las hojas de tu cultivo te están diciendo algo.\n\nEl análisis foliar ayuda a interpretar esas señales para corregir a tiempo.\n\n"+CTA,ig:ig("#analisisfoliar"),fb:fb("#AnálisisFoliar")},
+    c03:{t:'car',n:'Carrusel 03 · Antes del laboratorio: la muestra',img:'media/carousels/carrusel-03/slide-01.jpg',cap:"Un buen resultado empieza en el campo.\n\nDesliza para ver cómo tomar la muestra correctamente y evitar resultados poco confiables.\n\n"+CTA,ig:ig("#muestreo #analisisdesuelo"),fb:fb("#AnálisisDeSuelo")},
+    p04:{t:'post',n:'Post 04 · Asesoría técnica',img:'media/posts/post-04.jpg',cap:"Un resultado sirve más cuando sabes qué hacer con él.\n\nAdemás del análisis, te acompañamos con interpretación técnica para que tengas claro el siguiente paso en tu cultivo.\n\n"+CTA,ig:ig("#asesoriatecnica"),fb:fb("#AsesoríaTécnica")},
+    r06:{t:'reel',n:'Reel 06 · No solo importa cuánto riegas',img:'media/reels/poster-servicio-06-calidad-agua-riego.jpg',cap:"No solo importa cuánto riegas, también con qué agua.\n\nLa calidad del agua de riego influye en tu cultivo. Pregúntanos por el análisis de agua.\n\n"+CTA,ig:ig("#aguaderiego #riego"),fb:fb("#AguaDeRiego")},
+    r07:{t:'reel',n:'Reel 07 · Una mala muestra puede afectar el resultado',img:'media/reels/poster-servicio-07-muestra-mal-tomada.jpg',cap:"Una muestra mal tomada da un resultado que no sirve.\n\nAntes de mandar tu muestra, consulta con nosotros el procedimiento correcto. Es más fácil de lo que parece.\n\n"+CTA,ig:ig("#muestreo #analisisdesuelo"),fb:fb("#Muestreo")},
+    c04:{t:'car',n:'Carrusel 04 · Suelo, hoja y agua',img:'media/carousels/carrusel-04/slide-01.jpg',cap:"¿Dónde buscar la información que necesita tu cultivo?\n\nDesliza y conoce cuándo conviene revisar el suelo, el tejido vegetal o el agua de riego.\n\n"+CTA,ig:ig("#analisisfoliar #aguaderiego"),fb:fb("#AnálisisDeSuelo")},
+    r08:{t:'reel',n:'Reel 08 · ¿Suelo, hoja o agua?',img:'media/reels/poster-servicio-08-suelo-hoja-agua.jpg',cap:"¿Suelo, hoja o agua? Cada análisis responde algo distinto.\n\nTe ayudamos a elegir el que necesita tu cultivo según lo que estás observando.\n\n"+CTA,ig:ig("#analisisfoliar #aguaderiego"),fb:fb("#AnálisisDeSuelo")},
+    p05:{t:'post',n:'Post 05 · Proceso Fermier',img:'media/posts/post-05.jpg',cap:"Del campo a una decisión mejor informada.\n\nMuestra, análisis, diagnóstico y orientación: así trabajamos en FERMIER.\n\nComienza con tu muestra. "+CTA,ig:ig("#laboratorioagricola"),fb:fb()},
+    r09:{t:'reel',n:'Reel 09 · Un reporte sin interpretación',img:'media/reels/poster-servicio-09-no-solo-reporte.jpg',cap:"Un reporte de laboratorio solo sirve si sabes qué hacer con él.\n\nEn FERMIER te acompañamos con interpretación técnica, no solo con números.\n\n"+CTA,ig:ig("#asesoriatecnica"),fb:fb("#AsesoríaTécnica")},
+    c05:{t:'car',n:'Carrusel 05 · ¿Cuándo conviene realizar un análisis?',img:'media/carousels/carrusel-05/slide-01.jpg',cap:"No tienes que esperar a que el problema sea evidente.\n\nDesliza para ver en qué momentos del ciclo conviene analizar.\n\n"+CTA,ig:ig("#analisisdesuelo"),fb:fb("#AnálisisDeSuelo")},
+    r10:{t:'reel',n:'Reel 10 · ¿Debes esperar a que aparezca un problema?',img:'media/reels/poster-servicio-10-cuando-conviene-analizar.jpg',cap:"¿Esperas a que aparezca el problema para analizar?\n\nAnalizar a tiempo te da información antes de que sea evidente y te cuesta menos que corregir después.\n\n"+CTA,ig:ig("#analisisdesuelo"),fb:fb("#AnálisisDeSuelo")},
+    r03:{t:'reel',n:'Reel 03 · ¿Para qué sirve un análisis de suelo?',img:'media/reels/poster-servicio-03-para-que-sirve-analisis-suelo.jpg',cap:"¿Para qué sirve, en concreto, un análisis de suelo?\n\nTe da información para decidir antes de sembrar o durante el ciclo, en lugar de adivinar. Si aún no lo haces, este es un buen momento.\n\n"+CTA,ig:ig("#analisisdesuelo #suelo"),fb:fb("#AnálisisDeSuelo")}
+  };
+  const order = [
+    ['p01','r01','c01'], ['p02','r02','p06'], ['c02','p03','r04'], ['r05','c03','p04'],
+    ['r06','r07','c04'], ['r08','p05','r09'], ['c05','r10','r03']
+  ];
+  const TIPO = {post:'Post', car:'Carrusel', reel:'Reel'};
+  const start = new Date(2026,8,22); // martes 22 sep 2026
+  const slots = [];
+  order.forEach((wk, w) => {
+    [[0,'12:00'],[2,'12:00'],[4,'9:00']].forEach(([off,h], i) => {
+      const d = new Date(start); d.setDate(start.getDate() + w*7 + off);
+      slots.push({d, h, id: wk[i]});
+    });
+  });
+
+  document.getElementById('calBody').innerHTML = slots.map(s =>
+    `<tr><td class="d">${fmt(s.d)}</td><td class="d">${s.h}</td><td>${TIPO[pieces[s.id].t]}</td><td>${pieces[s.id].n}</td></tr>`).join('');
+
+  document.getElementById('feedList').innerHTML = slots.map(s => {
+    const p = pieces[s.id];
+    return `<div class="item ${p.t==='reel'?'reel':''}"><img src="${p.img}" alt="${p.n}" loading="lazy"><div><span class="when">${fmt(s.d)} · ${s.h} · Facebook + Instagram</span><h3>${p.n}</h3><div class="cap">${p.cap}</div><p class="tags"><b>Instagram</b> ${p.ig}</p><p class="tags"><b>Facebook</b> ${p.fb}</p></div></div>`;
+  }).join('');
+
+  // historias: lun/mié/vie 7:00, dom 19:00, empezando lun 21 sep -> primer lunes útil 28 sep? se inicia el lun 28 sep
+  const sd = [[1,'7:00'],[3,'7:00'],[5,'7:00'],[0,'19:00']];
+  const storyDates = [];
+  let cur = new Date(2026,8,23); // mié 23 sep
+  while (storyDates.length < 25) {
+    const m = sd.find(x => x[0] === cur.getDay());
+    if (m) storyDates.push({d:new Date(cur), h:m[1]});
+    cur.setDate(cur.getDate()+1);
+  }
+  document.getElementById('storyStrip').innerHTML = storyDates.map((s,i) =>
+    `<figure><img src="media/stories/story-${pad(i+1)}.jpg" alt="Historia ${pad(i+1)}" loading="lazy"><figcaption>H${pad(i+1)}<br>${fmt(s.d)}<br>${s.h}</figcaption></figure>`).join('');
+</script>
+</body>
+</html>
