@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /contenido/
+Disallow: /propuesta/
+
+Sitemap: __SITE_URL__/sitemap.xml
